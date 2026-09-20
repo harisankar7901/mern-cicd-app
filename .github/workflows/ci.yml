@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v6
+
+      - name: Build Docker image
+        run: docker build -t mern-task-app:${{ github.sha }} .
